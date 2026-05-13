@@ -54,8 +54,8 @@ Then open `index.html` in your web browser.
 
 ## 🔗 Connect With Me
 
-- 📧 **Email**: [Your Email]
-- 💼 **LinkedIn**: [Your LinkedIn Profile]
+- 📧 **Email**: *****@gmail.com
+- 💼 **LinkedIn**: [@MuktadirHQ](https://linkedin.com/in/muktadirHQ)
 - 🐙 **GitHub**: [@muktadirHQ](https://github.com/muktadirHQ)
 - 🌐 **Portfolio**: [muktadirHQ.github.io](https://muktadirHQ.github.io)
 
