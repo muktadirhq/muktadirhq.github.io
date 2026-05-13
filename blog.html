@@ -1432,16 +1432,22 @@
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', (e) => {
         if (menuOpen) {
-          e.preventDefault();
-          e.stopImmediatePropagation();
           const targetHref = link.getAttribute('href');
-          closeMenu();
-          setTimeout(() => {
-            const targetEl = document.querySelector(targetHref);
-            if (targetEl) {
-              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-          }, 400);
+          // Only prevent default for local anchors, not for page navigation
+          if (targetHref.startsWith('#')) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            closeMenu();
+            setTimeout(() => {
+              const targetEl = document.querySelector(targetHref);
+              if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }, 400);
+          } else {
+            // For links to other pages, just close the menu and allow navigation
+            closeMenu();
+          }
         }
       });
     });
