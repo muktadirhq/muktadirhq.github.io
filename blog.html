@@ -1526,6 +1526,34 @@
       });
     });
 
+    // Comment persistence with localStorage
+    function loadComments() {
+      const savedComments = localStorage.getItem('blog_comments');
+      if (savedComments) {
+        const comments = JSON.parse(savedComments);
+        const commentList = document.getElementById('commentList');
+        comments.forEach(comment => {
+          // Prevent XSS
+          const safeText = comment.text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          const commentHTML = `
+            <div class="comment">
+              <div class="comment-header">
+                <span class="comment-author">Anonymous User</span>
+                <span class="comment-date">${comment.date}</span>
+              </div>
+              <div class="comment-body">
+                ${safeText}
+              </div>
+            </div>
+          `;
+          commentList.insertAdjacentHTML('beforeend', commentHTML);
+        });
+      }
+    }
+
+    // Call loadComments on page load
+    document.addEventListener('DOMContentLoaded', loadComments);
+
     function handleComment(e) {
       e.preventDefault();
       const text = document.getElementById('commentText').value;
@@ -1533,6 +1561,15 @@
 
       const date = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
       
+      // Save to localStorage
+      const savedComments = localStorage.getItem('blog_comments');
+      const comments = savedComments ? JSON.parse(savedComments) : [];
+      comments.push({ text: text, date: date });
+      localStorage.setItem('blog_comments', JSON.stringify(comments));
+
+      // Prevent XSS
+      const safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
       const commentHTML = `
         <div class="comment" style="animation: fadeInUp 0.5s ease;">
           <div class="comment-header">
@@ -1540,7 +1577,7 @@
             <span class="comment-date">${date}</span>
           </div>
           <div class="comment-body">
-            ${text}
+            ${safeText}
           </div>
         </div>
       `;
@@ -1549,7 +1586,5 @@
       document.getElementById('commentForm').reset();
     }
   </script>
-</body>
-</html>
 </body>
 </html>
