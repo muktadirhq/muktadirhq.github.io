@@ -1330,30 +1330,26 @@
         <div class="comments-section">
           <h3 class="comments-title">Comments</h3>
           
-          <div class="comment-list" id="commentList">
-            <!-- Sample Comment -->
-            <div class="comment">
-              <div class="comment-header">
-                <span class="comment-author">Anonymous Developer</span>
-                <span class="comment-date">May 11, 2026</span>
-              </div>
-              <div class="comment-body">
-                Great post! Really helped me understand the basics.
-              </div>
-            </div>
+          <div class="giscus">
+            <script src="https://giscus.app/client.js"
+                    data-repo="MuktadirHQ/MuktadirHQ.github.io"
+                    data-repo-id="[ENTER REPO ID HERE]"
+                    data-category="Announcements"
+                    data-category-id="[ENTER CATEGORY ID HERE]"
+                    data-mapping="pathname"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="transparent_dark"
+                    data-lang="en"
+                    crossorigin="anonymous"
+                    async>
+            </script>
           </div>
-
-          <div class="contact-form" style="padding: 24px;">
-            <h4 style="margin-bottom: 16px; color: var(--text-primary);">Leave an Anonymous Comment</h4>
-            <form id="commentForm" onsubmit="handleComment(event)">
-              <div class="form-group">
-                <textarea id="commentText" placeholder="Write your comment here..." required style="min-height: 80px;"></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">
-                <i data-lucide="message-square" style="width:16px;height:16px;"></i> Post Comment
-              </button>
-            </form>
-          </div>
+          <p style="margin-top: 20px; font-size: 0.85rem; color: var(--text-muted); text-align: center;">
+            Note: Comments are powered by GitHub Discussions.
+          </p>
         </div>
       </article>
 
@@ -1525,66 +1521,6 @@
         orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
       });
     });
-
-    // Comment persistence with localStorage
-    function loadComments() {
-      const savedComments = localStorage.getItem('blog_comments');
-      if (savedComments) {
-        const comments = JSON.parse(savedComments);
-        const commentList = document.getElementById('commentList');
-        comments.forEach(comment => {
-          // Prevent XSS
-          const safeText = comment.text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-          const commentHTML = `
-            <div class="comment">
-              <div class="comment-header">
-                <span class="comment-author">Anonymous User</span>
-                <span class="comment-date">${comment.date}</span>
-              </div>
-              <div class="comment-body">
-                ${safeText}
-              </div>
-            </div>
-          `;
-          commentList.insertAdjacentHTML('beforeend', commentHTML);
-        });
-      }
-    }
-
-    // Call loadComments on page load
-    document.addEventListener('DOMContentLoaded', loadComments);
-
-    function handleComment(e) {
-      e.preventDefault();
-      const text = document.getElementById('commentText').value;
-      if (!text.trim()) return;
-
-      const date = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-      
-      // Save to localStorage
-      const savedComments = localStorage.getItem('blog_comments');
-      const comments = savedComments ? JSON.parse(savedComments) : [];
-      comments.push({ text: text, date: date });
-      localStorage.setItem('blog_comments', JSON.stringify(comments));
-
-      // Prevent XSS
-      const safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-      const commentHTML = `
-        <div class="comment" style="animation: fadeInUp 0.5s ease;">
-          <div class="comment-header">
-            <span class="comment-author">Anonymous User</span>
-            <span class="comment-date">${date}</span>
-          </div>
-          <div class="comment-body">
-            ${safeText}
-          </div>
-        </div>
-      `;
-      
-      document.getElementById('commentList').insertAdjacentHTML('beforeend', commentHTML);
-      document.getElementById('commentForm').reset();
-    }
   </script>
 </body>
 </html>
