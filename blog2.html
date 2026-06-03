@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MuktadirHQ</title>
+  <title>Blog - MuktadirHQ</title>
   <meta name="description" content="Portfolio of Muktadir Haque Sarker – Backend Python Developer specializing in Django, Flask, REST APIs, and Data Analysis." />
 
   <!-- Favicons -->
@@ -1248,6 +1248,24 @@
       .hero-name { font-size: 1.9rem; }
       .code-window { display: none; }
     }
+
+    /* ===== Blog Specific Styles ===== */
+    .blog-header { padding: 150px 0 80px; text-align: center; position: relative; }
+    .blog-container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    .blog-post { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; margin-bottom: 40px; transition: var(--transition); text-align: left; }
+    .blog-post:hover { border-color: var(--border-hover); box-shadow: var(--shadow-card); }
+    .blog-title { font-size: 2rem; font-weight: 800; margin-bottom: 16px; color: var(--text-primary); }
+    .blog-meta { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px; display: flex; gap: 16px; }
+    .blog-content { color: var(--text-secondary); line-height: 1.8; font-size: 1.05rem; }
+    .blog-content p { margin-bottom: 20px; }
+    .comments-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border); text-align: left; }
+    .comments-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 24px; color: var(--text-primary); }
+    .comment-list { margin-bottom: 40px; }
+    .comment { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 16px; }
+    .comment-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; }
+    .comment-author { font-weight: 600; color: var(--accent-light); }
+    .comment-date { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.8rem; }
+    .comment-body { color: var(--text-secondary); font-size: 0.95rem; }
   </style>
 </head>
 <body>
@@ -1257,21 +1275,20 @@
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
 
-  <!-- ===== Navbar ===== -->
   <nav class="navbar" id="navbar">
     <div class="container">
-      <a href="#hero" class="logo">
+      <a href="index.html#hero" class="logo">
         MuktadirHQ
       </a>
 
 
       <ul class="nav-links" id="navLinks">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#blog">Blog</a></li>
-        <li><a href="#contact" class="nav-cta">Contact</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#education">Education</a></li>
+        <li><a href="#" class="active">Blog</a></li>
+        <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
       </ul>
 
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
@@ -1280,581 +1297,63 @@
     </div>
   </nav>
 
-  <!-- ===== Hero ===== -->
-  <section class="hero" id="hero">
+  <!-- ===== Blog Header ===== -->
+  <section class="blog-header">
     <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <span class="dot"></span>
-          Available for opportunities
-        </div>
-
-        <h1 class="hero-name">
-          Hi, I'm <span class="highlight">Muktadir</span><br />Haque Sarker
-        </h1>
-        <p class="hero-role">&gt; Python_developer</p>
-        <p class="hero-desc">
-          I build scalable web applications and APIs with Python, Django &amp; Flask.
-          Passionate about clean architecture, database design, and turning complex problems into elegant solutions.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">
-            <i data-lucide="folder-open" style="width:18px;height:18px;"></i>
-            View Projects
-          </a>
-          <a href="#contact" class="btn btn-outline">
-            <i data-lucide="send" style="width:18px;height:18px;"></i>
-            Get in Touch
-          </a>
-          <a href="Muktadir_Haque_Sarker_CV.pdf" target="_blank" class="btn btn-outline">
-            <i data-lucide="download" style="width:18px;height:18px;"></i>
-            Download CV
-          </a>
-        </div>
-
-        <div class="hero-stats">
-          <div class="stat">
-            <div class="stat-number">3+</div>
-            <div class="stat-label">Projects Built</div>
-          </div>
-          <div class="stat">
-            <div class="stat-number">5+</div>
-            <div class="stat-label">Technologies</div>
-          </div>
-          <div class="stat">
-            <div class="stat-number">3</div>
-            <div class="stat-label">Certifications</div>
-          </div>
-        </div>
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Welcome to my Thoughts
       </div>
-
-      <div class="hero-visual">
-        <div class="code-window">
-          <div class="code-header">
-            <div class="code-dot red"></div>
-            <div class="code-dot yellow"></div>
-            <div class="code-dot green"></div>
-            <span>developer.py</span>
-          </div>
-          <div class="code-body">
-            <span class="kw">class</span> <span class="cls">Developer</span>:<br />
-            &nbsp;&nbsp;<span class="kw">def</span> <span class="fn">__init__</span>(<span class="op">self</span>):<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="op">self</span>.name = <span class="str">"Muktadir Haque Sarker"</span><br />
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="op">self</span>.role = <span class="str">"Python Developer"</span><br />
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="op">self</span>.stack = [<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Python"</span>, <span class="str">"Django"</span>,<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Flask"</span>, <span class="str">"PostgreSQL"</span><br />
-            &nbsp;&nbsp;&nbsp;&nbsp;]<br /><br />
-            &nbsp;&nbsp;<span class="kw">def</span> <span class="fn">build</span>(<span class="op">self</span>, idea):<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="fn">scalable_app</span>(idea)<span class="typing-cursor"></span>
-          </div>
-        </div>
-      </div>
+      <h1 class="section-title">The Blog</h1>
+      <p class="section-subtitle" style="margin: 0 auto 48px auto;">Writing about anything.</p>
     </div>
   </section>
 
-  <!-- ===== About ===== -->
-  <section class="section" id="about">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-label"><h3>Who I Am</h3></div>
-        <div class="section-title">About Me</div>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-text reveal">
-          <p>
-            I'm a <strong>Backend Python Developer</strong> with a strong foundation in web development,
-            database design, and API integration. I'm a Computer Science graduate from <strong>BRAC University</strong>,
-            Dhaka, Bangladesh, and I'm driven by a commitment to writing clean, maintainable code.
+  <!-- ===== Blog Content ===== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="blog-container">
+      
+      <!-- Sample Post -->
+      <article class="blog-post reveal">
+        <h2 class="blog-title">Root's</h2>
+        <div class="blog-meta">
+          <span><i data-lucide="calendar" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:4px;"></i> June 03, 2026</span>
+          <span><i data-lucide="user" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:4px;"></i> Muktadir Haque Sarker</span>
+        </div>
+        <div class="blog-content">
+          <p>Not a root finding algorithm. ইজ ইউর রুট দ্যা আল্টিমেট ডেস্টিনেশন?....(আসবে)</p>
+        </div>
+        <!-- Comments Section -->
+        <div class="comments-section">
+          <h3 class="comments-title">Comments</h3>
+          
+          <div class="giscus">
+            <script src="https://giscus.app/client.js"
+                    data-repo="MuktadirHQ/MuktadirHQ.github.io"
+                    data-repo-id="R_kgDOSSXtvA"
+                    data-category="General"
+                    data-category-id="DIC_kwDOSSXtvM4C8-kU"
+                    data-mapping="pathname"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="dark_dimmed"
+                    data-lang="en"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+          </div>
+          <p style="margin-top: 20px; font-size: 0.85rem; color: var(--text-muted); text-align: center;">
+            Note: Comments are powered by GitHub Discussions.
           </p>
-          <p>
-            Proficient in <strong>Django, Flask, and REST APIs</strong> with hands-on experience in data analysis
-            using Pandas and visualization tools. I love turning complex problems into scalable, well-architected
-            web applications.
-          </p>
-          <p>
-            Beyond coding, I'm passionate about competitive programming, open-source contribution,
-            and exploring the intersection of web development and data science.
-          </p>
-
-          <div class="about-info">
-            <div class="info-item">
-              <div class="label">Location</div>
-              <div class="value">Dhaka, Bangladesh</div>
-            </div>
-            <div class="info-item">
-              <div class="label">Email</div>
-              <div class="value">hqmuk74dir@gmail.com</div>
-            </div>
-            <div class="info-item">
-              <div class="label">Languages</div>
-              <div class="value">Bangla, English, Hindi</div>
-            </div>
-            <div class="info-item">
-              <div class="label">Degree</div>
-              <div class="value">BSc in CSE</div>
-            </div>
-          </div>
         </div>
+      </article>
 
-        <div class="about-cards reveal">
-          <div class="about-card">
-            <div class="about-card-icon">
-              <i data-lucide="server" style="width:24px;height:24px;"></i>
-            </div>
-            <div>
-              <h3>Backend Development</h3>
-              <p>Building robust APIs and server-side applications with Django, Flask, and REST frameworks. Focus on scalability and performance.</p>
-            </div>
-          </div>
-          <div class="about-card">
-            <div class="about-card-icon" style="background: rgba(0,212,170,0.1); color: var(--accent-secondary);">
-              <i data-lucide="database" style="width:24px;height:24px;"></i>
-            </div>
-            <div>
-              <h3>Database Design</h3>
-              <p>Designing efficient database schemas with PostgreSQL and MySQL. Experience with optimization and complex query patterns.</p>
-            </div>
-          </div>
-          <div class="about-card">
-            <div class="about-card-icon" style="background: rgba(255,107,107,0.1); color: #ff6b6b;">
-              <i data-lucide="bar-chart-3" style="width:24px;height:24px;"></i>
-            </div>
-            <div>
-              <h3>Data Analysis</h3>
-              <p>Extracting insights using Pandas, NumPy, Matplotlib, and Seaborn. Turning raw data into actionable visualizations.</p>
-            </div>
-          </div>
-          <div class="about-card">
-            <div class="about-card-icon" style="background: rgba(255,193,7,0.1); color: #ffc107;">
-              <i data-lucide="git-branch" style="width:24px;height:24px;"></i>
-            </div>
-            <div>
-              <h3>API Integration</h3>
-              <p>Designing and consuming RESTful APIs, payment gateways, and third-party services like Google Maps and SSLCOMMERZ.</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- ===== Skills ===== -->
-  <section class="section" id="skills">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-label">My Toolbox</div>
-        <div class="section-title">Skills & Technologies</div>
-        <p class="section-subtitle">The technologies and tools I use to bring ideas to life, from backend APIs to data-driven insights.</p>
-      </div>
-
-      <div class="skills-grid">
-        <div class="skill-category reveal">
-          <div class="skill-cat-header">
-            <div class="skill-cat-icon lang">
-              <i data-lucide="code-2" style="width:22px;height:22px;"></i>
-            </div>
-            <h3>Languages</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">C</span>
-            <span class="skill-tag">C++</span>
-            <span class="skill-tag">SQL</span>
-          </div>
-        </div>
-
-        <div class="skill-category reveal">
-          <div class="skill-cat-header">
-            <div class="skill-cat-icon framework">
-              <i data-lucide="layers" style="width:22px;height:22px;"></i>
-            </div>
-            <h3>Frameworks & Libraries</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag">Django</span>
-            <span class="skill-tag">Django REST Framework</span>
-            <span class="skill-tag">Flask</span>
-            <span class="skill-tag">Pandas</span>
-            <span class="skill-tag">NumPy</span>
-            <span class="skill-tag">Matplotlib</span>
-            <span class="skill-tag">Seaborn</span>
-          </div>
-        </div>
-
-        <div class="skill-category reveal">
-          <div class="skill-cat-header">
-            <div class="skill-cat-icon db">
-              <i data-lucide="database" style="width:22px;height:22px;"></i>
-            </div>
-            <h3>Databases</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag">PostgreSQL</span>
-            <span class="skill-tag">MySQL</span>
-            <span class="skill-tag">SQLite3</span>
-          </div>
-        </div>
-
-        <div class="skill-category reveal">
-          <div class="skill-cat-header">
-            <div class="skill-cat-icon tools">
-              <i data-lucide="wrench" style="width:22px;height:22px;"></i>
-            </div>
-            <h3>Tools & Technologies</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">REST APIs</span>
-            <span class="skill-tag">Postman</span>
-            <span class="skill-tag">Version Control</span>
-            <span class="skill-tag">API Development</span>
-          </div>
-        </div>
-
-        <div class="skill-category reveal">
-          <div class="skill-cat-header">
-            <div class="skill-cat-icon core">
-              <i data-lucide="brain" style="width:22px;height:22px;"></i>
-            </div>
-            <h3>Core Competencies</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag">Backend Development</span>
-            <span class="skill-tag">Data Analysis</span>
-            <span class="skill-tag">Problem Solving</span>
-            <span class="skill-tag">Database Design</span>
-            <span class="skill-tag">Data Science</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Projects ===== -->
-  <section class="section" id="projects">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-label">Featured Work</div>
-        <div class="section-title">Projects</div>
-        <p class="section-subtitle">A selection of projects that showcase my skills in full-stack development, API integration, and problem solving.</p>
-      </div>
-
-      <div class="projects-grid">
-        <!-- Project 1: Mover -->
-        <a href="https://github.com/MuktadirHQ/Mover" target="_blank" class="project-card reveal" style="text-decoration: none; color: inherit;">
-          <div class="project-banner">
-            <div class="project-banner-bg mover">MOVER</div>
-            <div class="project-number">01</div>
-          </div>
-          <div class="project-content">
-            <h3>Mover</h3>
-            <div class="project-type">Ride-Sharing Platform</div>
-            <div class="project-desc">
-              <ul>
-                <li>Account holder / User type wise site permission system</li>
-                <li>Dynamic maps and route insights via Google Maps API</li>
-                <li>Payment gateway sandbox using SSLCOMMERZ</li>
-              </ul>
-            </div>
-            <div class="project-tech">
-              <span>Python</span>
-              <span>Google Maps API</span>
-              <span>SSLCOMMERZ</span>
-              <span>PostgreSQL</span>
-              <span>JavaScript</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- Project 2: Task Manager -->
-        <a href="https://github.com/MuktadirHQ/Task-Manager" target="_blank" class="project-card reveal" style="text-decoration: none; color: inherit;">
-          <div class="project-banner">
-            <div class="project-banner-bg taskman">TASKMAN</div>
-            <div class="project-number">02</div>
-          </div>
-          <div class="project-content">
-            <h3>Task Manager</h3>
-            <div class="project-type">Task Management System</div>
-            <div class="project-desc">
-              <ul>
-                <li>Collaborative task management application</li>
-                <li>Full CRUD operations for tasks, projects &amp; users</li>
-                <li>Profile update / change page for convenience</li>
-              </ul>
-            </div>
-            <div class="project-tech">
-              <span>Django</span>
-              <span>MySQL</span>
-              <span>JavaScript</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- Project 3: DjangoMart -->
-        <a href="https://github.com/MuktadirHQ/DjangoMart" target="_blank" class="project-card reveal" style="text-decoration: none; color: inherit;">
-          <div class="project-banner">
-            <div class="project-banner-bg djangomart">DJANGOMART</div>
-            <div class="project-number">03</div>
-          </div>
-          <div class="project-content">
-            <h3>DjangoMart</h3>
-            <div class="project-type">E-Commerce Platform</div>
-            <div class="project-desc">
-              <ul>
-                <li>Full-featured app with user authentication &amp; product management</li>
-                <li>Product categorized view, pagination &amp; payment calculation</li>
-                <li>Integrated secure payment gateway</li>
-              </ul>
-            </div>
-            <div class="project-tech">
-              <span>Django</span>
-              <span>PostgreSQL</span>
-              <span>JavaScript</span>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Education & Certifications ===== -->
-  <section class="section" id="education">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-label">Background</div>
-        <div class="section-title">Education & Certifications</div>
-        <p class="section-subtitle">My academic journey and professional training that built the foundation for my development career.</p>
-      </div>
-
-      <div class="edu-grid">
-        <div class="reveal">
-          <h3 style="font-size: 1.1rem; margin-bottom: 28px; display: flex; align-items: center; gap: 10px;">
-            <i data-lucide="graduation-cap" style="width:22px;height:22px;color:var(--accent);"></i>
-            Education
-          </h3>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-year">2022 — Present</div>
-              <h3>BSc in Computer Science & Engineering</h3>
-              <p>BRAC University, Dhaka, Bangladesh</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-year">2018 — 2020</div>
-              <h3>Higher Secondary Certificate (HSC) — Science</h3>
-              <p>Dhaka City College</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-year">2015 — 2018</div>
-              <h3>Secondary School Certificate (SSC) — Science</h3>
-              <p>Rajshahi Cantonment Public School & College</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="reveal">
-          <h3 style="font-size: 1.1rem; margin-bottom: 28px; display: flex; align-items: center; gap: 10px;">
-            <i data-lucide="award" style="width:22px;height:22px;color:var(--accent-secondary);"></i>
-            Certifications & Training
-          </h3>
-          <div class="cert-list">
-            <div class="cert-card">
-              <div class="cert-icon phitron">
-                <i data-lucide="code" style="width:20px;height:20px;"></i>
-              </div>
-              <div class="cert-info">
-                <h4>CSE Fundamentals with Phitron</h4>
-                <p>Intensive backend development bootcamp — Python, Django & REST APIs</p>
-              </div>
-            </div>
-            <div class="cert-card">
-              <div class="cert-icon hackerrank">
-                <i data-lucide="trophy" style="width:20px;height:20px;"></i>
-              </div>
-              <div class="cert-info">
-                <h4>Python Basic — HackerRank</h4>
-                <p>Certified proficiency in Python fundamentals</p>
-              </div>
-            </div>
-            <div class="cert-card">
-              <div class="cert-icon datacamp">
-                <i data-lucide="line-chart" style="width:20px;height:20px;"></i>
-              </div>
-              <div class="cert-info">
-                <h4>Data Engineer — DataCamp</h4>
-                <p>Data engineering portfolio track certification</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Blog Section ===== -->
-  <section class="section" id="blog">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-label">Thoughts & Writings</div>
-        <div class="section-title">Blog</div>
-        <p class="section-subtitle">I write about anything that interests me.</p>
-      </div>
-
-      <div class="projects-grid" style="margin-bottom: 40px;">
-        <!-- Blog Post 1 -->
-        <a href="blog.html" class="project-card reveal" style="text-decoration: none; color: inherit;">
-          <div class="project-banner">
-            <div class="project-banner-bg" style="background: linear-gradient(135deg, #16222A, #3A6073); font-size: 2rem;">0.7</div>
-            <div class="project-number">01</div>
-          </div>
-          <div class="project-content">
-            <h3>0.7 কেনো পেলাম?</h3>
-            <div class="project-type" style="display: flex; align-items: center; gap: 4px;">
-              <i data-lucide="calendar" style="width:14px;height:14px;"></i> May 17, 2026
-            </div>
-            <div class="project-desc">
-              <p>তখন আমি কেবল উড়া শুরু করেছি। তার উপর উড়ে যাবার মতৌই একটা সেমিস্টারে ঢুকলাম। সব কিছুই করেছি শুধু টেবিল টেনিস খেলা হয়নাই, হতাশাজনক। যাইহোক সেমিস্টারের পড়াশোনা শুরু হলো...</p>
-            </div>
-            <div class="project-tech">
-              <span>Personal</span>
-              <span>University</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- Blog Post 2 -->
-        <a href="blog2.html" class="project-card reveal" style="text-decoration: none; color: inherit;">
-          <div class="project-banner">
-            <div class="project-banner-bg" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); font-size: 2rem;">ROOT'S</div>
-            <div class="project-number">02</div>
-          </div>
-          <div class="project-content">
-            <h3>root's</h3>
-            <div class="project-type" style="display: flex; align-items: center; gap: 4px;">
-              <i data-lucide="calendar" style="width:14px;height:14px;"></i> June 3, 2026
-            </div>
-            <div class="project-desc">
-              <p>not a root finding algorithm.</p>
-            </div>
-            <div class="project-tech">
-              <span>Thoughts</span>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <div class="reveal" style="text-align: center;">
-        <a href="blog.html" class="btn btn-primary">
-          <i data-lucide="book-open" style="width:18px;height:18px;"></i>
-          View All Posts
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Contact ===== -->
-  <section class="section" id="contact">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-label">Get in Touch</div>
-        <div class="section-title">Let's Work Together</div>
-        <p class="section-subtitle">Have a project in mind or want to discuss an opportunity? I'd love to hear from you.</p>
-      </div>
-
-      <div class="contact-wrapper">
-        <div class="contact-info-cards reveal">
-          <a href="mailto:hqmuk74dir@gmail.com" class="contact-card">
-            <div class="contact-card-icon email">
-              <i data-lucide="mail" style="width:22px;height:22px;"></i>
-            </div>
-            <div class="contact-card-text">
-              <div class="label">Email</div>
-              <div class="value">hqmuk74dir@gmail.com</div>
-            </div>
-          </a>
-          <a href="tel:+8801983218363" class="contact-card">
-            <div class="contact-card-icon phone">
-              <i data-lucide="phone" style="width:22px;height:22px;"></i>
-            </div>
-            <div class="contact-card-text">
-              <div class="label">Phone</div>
-              <div class="value">+88 01983-218363</div>
-            </div>
-          </a>
-          <div class="contact-card">
-            <div class="contact-card-icon location">
-              <i data-lucide="map-pin" style="width:22px;height:22px;"></i>
-            </div>
-            <div class="contact-card-text">
-              <div class="label">Location</div>
-              <div class="value">Dhaka, Bangladesh</div>
-            </div>
-          </div>
-          <a href="https://linkedin.com/in/muktadirhq" target="_blank" class="contact-card">
-          <div class="contact-card-icon linkedin">
-              <!-- Replaced Lucide Icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-              <rect width="4" height="12" x="2" y="9"></rect>
-          <circle cx="4" cy="4" r="2"></circle>
-          </svg>
-          </div>
-  <div class="contact-card-text">
-    <div class="label">LinkedIn</div>
-    <div class="value">Connect with me</div>
-  </div>
-  </a>
-          <a href="https://github.com/MuktadirHQ" target="_blank" class="contact-card">
-  <div class="contact-card-icon github">
-    <!-- Replaced Lucide Icon -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 8 18v4"></path>
-    </svg>
-  </div>
-  <div class="contact-card-text">
-    <div class="label">GitHub</div>
-    <div class="value">View my code</div>
-  </div>
-</a>
-        </div>
-
-        <div class="contact-form reveal">
-          <h3>Send a Message</h3>
-          <p>Fill out the form and I'll get back to you as soon as possible.</p>
-          <form id="contactForm" onsubmit="handleSubmit(event)">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" placeholder="John Doe" required />
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="john@example.com" required />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <input type="text" id="subject" name="subject" placeholder="Project Discussion" required />
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-submit">
-              <i data-lucide="send" style="width:18px;height:18px;"></i>
-              Send Message
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Footer ===== -->
-  <footer class="footer">
+<footer class="footer">
     <div class="container">
       <div class="footer-socials">
   <a href="https://github.com/MuktadirHQ" target="_blank" aria-label="GitHub">
@@ -1886,7 +1385,7 @@
     <i data-lucide="arrow-up" style="width:22px;height:22px;"></i>
   </button>
 
-  <!-- ===== Scripts ===== -->
+<!-- ===== Scripts ===== -->
   <script>
     // Initialize Lucide Icons
     lucide.createIcons();
@@ -1932,16 +1431,22 @@
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', (e) => {
         if (menuOpen) {
-          e.preventDefault();
-          e.stopImmediatePropagation();
           const targetHref = link.getAttribute('href');
-          closeMenu();
-          setTimeout(() => {
-            const targetEl = document.querySelector(targetHref);
-            if (targetEl) {
-              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-          }, 400);
+          // Only prevent default for local anchors, not for page navigation
+          if (targetHref.startsWith('#')) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            closeMenu();
+            setTimeout(() => {
+              const targetEl = document.querySelector(targetHref);
+              if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }, 400);
+          } else {
+            // For links to other pages, just close the menu and allow navigation
+            closeMenu();
+          }
         }
       });
     });
