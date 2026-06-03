@@ -45,10 +45,12 @@ Then open `index.html` in your web browser.
 
 ```
 .
-├── index.html                      # Main portfolio page
-├── README.md                        # This file
+├── index.html                     # Main portfolio page
+├── blog.html                      # Blog page
+├── blog2.html                     # Secondary Blog page
+├── README.md                      # This file
 ├── Muktadir_Haque_Sarker_CV.pdf   # Resume/CV
-└── favicon/                         # Website favicon files
+└── favicon/                       # Website favicon files
     └── site.webmanifest           # Web app manifest
 ```
 
@@ -65,4 +67,4 @@ This project is open source and available under the MIT License.
 
 ---
 
-*Last updated: May 2026*" 
+*Last updated: June 2026*" 
