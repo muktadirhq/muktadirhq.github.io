@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Posts – MuktadirHQ</title>
+  <meta name="description" content="All blog posts by Muktadir Haque Sarker – thoughts, stories, and ideas." />
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png" />
+  <link rel="icon" type="image/x-icon" href="favicon/favicon.ico" />
+  <link rel="manifest" href="favicon/site.webmanifest" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+
+  <style>
+    /* ===== CSS Reset & Custom Properties ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #111118;
+      --bg-card: #16161f;
+      --bg-card-hover: #1c1c28;
+      --accent: #6c63ff;
+      --accent-light: #8b83ff;
+      --accent-glow: rgba(108, 99, 255, 0.25);
+      --accent-secondary: #00d4aa;
+      --accent-secondary-glow: rgba(0, 212, 170, 0.2);
+      --text-primary: #e8e6f0;
+      --text-secondary: #9896a8;
+      --text-muted: #6b6980;
+      --border: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(108, 99, 255, 0.3);
+      --gradient-accent: linear-gradient(135deg, #6c63ff, #00d4aa);
+      --gradient-bg: linear-gradient(180deg, #0a0a0f 0%, #0e0e18 100%);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-pill: 50px;
+      --shadow-card: 0 4px 24px rgba(0,0,0,0.3);
+      --shadow-glow: 0 0 40px var(--accent-glow);
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Fira Code', 'Cascadia Code', monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) var(--bg-secondary);
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.menu-open { overflow: hidden; }
+
+    /* ===== Scrollbar ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+
+    /* ===== Utility ===== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== Animated Background Grid ===== */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(108, 99, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108, 99, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 100%);
+    }
+
+    /* ===== Floating Orbs ===== */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: -1;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+
+    .orb-1 { width: 400px; height: 400px; background: var(--accent); top: -100px; left: -100px; }
+    .orb-2 { width: 350px; height: 350px; background: var(--accent-secondary); bottom: -80px; right: -80px; animation-delay: -7s; }
+    .orb-3 { width: 250px; height: 250px; background: #ff6b6b; top: 50%; left: 50%; animation-delay: -14s; opacity: 0.2; }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -40px) scale(1.05); }
+      66% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 16px 0;
+      transition: var(--transition);
+      overflow: visible;
+    }
+
+    .navbar.scrolled {
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-links .nav-cta {
+      background: rgba(108, 99, 255, 0.15);
+      color: var(--accent-light);
+      border: 1px solid rgba(108, 99, 255, 0.3);
+    }
+
+    .nav-links .nav-cta:hover {
+      background: rgba(108, 99, 255, 0.25);
+      color: white;
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+
+    .mobile-toggle:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* ===== Buttons ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius-pill);
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+      font-family: var(--font-body);
+    }
+
+    .btn-primary {
+      background: var(--gradient-accent);
+      color: white;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--accent-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      background: rgba(108, 99, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* ===== Page Hero ===== */
+    .page-hero {
+      padding: 160px 0 80px;
+      text-align: center;
+      position: relative;
+    }
+
+    .page-hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .page-hero-label::before,
+    .page-hero-label::after {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: var(--gradient-accent);
+      border-radius: 2px;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--text-primary) 60%, var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    .page-hero p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+    }
+
+    .post-count-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(108, 99, 255, 0.1);
+      border: 1px solid rgba(108, 99, 255, 0.25);
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      color: var(--accent-light);
+      font-weight: 600;
+    }
+
+    /* ===== Filter Tabs ===== */
+    .filter-section {
+      padding: 0 0 60px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 60px;
+    }
+
+    .filter-tab {
+      padding: 9px 22px;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: var(--font-body);
+      transition: var(--transition);
+    }
+
+    .filter-tab:hover {
+      border-color: var(--accent);
+      color: var(--accent-light);
+      background: rgba(108, 99, 255, 0.08);
+    }
+
+    .filter-tab.active {
+      background: var(--gradient-accent);
+      border-color: transparent;
+      color: white;
+      box-shadow: 0 4px 16px var(--accent-glow);
+    }
+
+    /* ===== Posts Grid ===== */
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 28px;
+      margin-bottom: 80px;
+    }
+
+    /* ===== Post Card ===== */
+    .post-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .post-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card), 0 0 40px rgba(108, 99, 255, 0.1);
+    }
+
+    .post-card.hidden {
+      display: none;
+    }
+
+    .post-banner {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .post-banner-bg {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: rgba(255,255,255,0.08);
+      transition: transform 0.5s ease;
+    }
+
+    .post-card:hover .post-banner-bg {
+      transform: scale(1.05);
+    }
+
+    .post-number {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      background: rgba(0,0,0,0.4);
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      backdrop-filter: blur(10px);
+    }
+
+    .post-reading-time {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      background: rgba(0,0,0,0.45);
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .post-content {
+      padding: 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .post-content h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      transition: color var(--transition);
+    }
+
+    .post-card:hover .post-content h2 {
+      color: var(--accent-light);
+    }
+
+    .post-date {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .post-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+
+    .post-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .post-tag {
+      padding: 5px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+
+    .post-card:hover .post-tag {
+      border-color: rgba(108, 99, 255, 0.2);
+      color: var(--accent-light);
+    }
+
+    .post-arrow {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      width: 36px;
+      height: 36px;
+      background: rgba(108, 99, 255, 0.1);
+      border: 1px solid rgba(108, 99, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: var(--transition);
+    }
+
+    .post-card:hover .post-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ===== Empty State ===== */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 24px;
+      display: none;
+    }
+
+    .empty-state.visible {
+      display: block;
+    }
+
+    .empty-state-icon {
+      width: 72px;
+      height: 72px;
+      background: rgba(108, 99, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      color: var(--accent);
+    }
+
+    .empty-state h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .empty-state p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* ===== Back Link ===== */
+    .back-section {
+      text-align: center;
+      padding-bottom: 100px;
+    }
+
+    /* ===== Reveal Animation ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 0;
+      text-align: center;
+    }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .footer-socials a {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-socials a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(108, 99, 255, 0.08);
+      transform: translateY(-3px);
+    }
+
+    .footer p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .heart { display: inline-block; animation: heartbeat 1.5s ease infinite; }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* ===== Scroll to Top ===== */
+    .scroll-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 48px;
+      height: 48px;
+      background: var(--gradient-accent);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: var(--transition);
+      box-shadow: 0 4px 20px var(--accent-glow);
+      z-index: 999;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-top:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px var(--accent-glow);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 10, 15, 0.97);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        z-index: 999;
+      }
+
+      .nav-links.active { display: flex; }
+
+      .nav-links a {
+        font-size: 1.3rem;
+        padding: 12px 24px;
+      }
+
+      .mobile-toggle { display: flex; z-index: 1001; }
+
+      .posts-grid { grid-template-columns: 1fr; }
+
+      .page-hero { padding: 140px 0 60px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Effects -->
+  <div class="bg-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">MuktadirHQ</a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#education">Education</a></li>
+        <li><a href="posts.html" style="color: var(--accent-light);">Blog</a></li>
+        <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+      </ul>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+        <i data-lucide="menu" style="width:24px;height:24px;"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== Page Hero ===== -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="reveal">
+        <div class="page-hero-label">Thoughts &amp; Writings</div>
+        <h1>All Posts</h1>
+        <p>Stories, ideas, and things that made me think. I write about life, tech, and whatever else keeps me up at night.</p>
+        <div class="post-count-badge">
+          <i data-lucide="book-open" style="width:15px;height:15px;"></i>
+          <span id="totalCount">3</span> Posts Published
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Posts ===== -->
+  <section class="filter-section">
+    <div class="container">
+
+      <!-- Filter Tabs -->
+      <div class="reveal filter-tabs" id="filterTabs">
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="Personal">Personal</button>
+        <button class="filter-tab" data-filter="University">University</button>
+        <button class="filter-tab" data-filter="Thoughts">Thoughts</button>
+        <button class="filter-tab" data-filter="Philosophy">Philosophy</button>
+      </div>
+
+      <!-- Posts Grid -->
+      <div class="posts-grid" id="postsGrid">
+
+        <!-- Post 1 -->
+        <a href="blog.html"
+           class="post-card reveal"
+           data-tags="Personal,University">
+          <div class="post-banner">
+            <div class="post-banner-bg" style="background: linear-gradient(135deg, #16222A, #3A6073);">0.7</div>
+            <div class="post-number">01</div>
+            <div class="post-reading-time">
+              <i data-lucide="clock" style="width:12px;height:12px;"></i> 5 min
+            </div>
+          </div>
+          <div class="post-content">
+            <h2>0.7 কেনো পেলাম?</h2>
+            <div class="post-date">
+              <i data-lucide="calendar" style="width:13px;height:13px;"></i>
+              May 17, 2026
+            </div>
+            <div class="post-desc">
+              তখন আমি কেবল উড়া শুরু করেছি। তার উপর উড়ে যাবার মতৌই একটা সেমিস্টারে ঢুকলাম। সব কিছুই করেছি শুধু টেবিল টেনিস খেলা হয়নাই, হতাশাজনক...
+            </div>
+            <div class="post-tags">
+              <span class="post-tag">Personal</span>
+              <span class="post-tag">University</span>
+            </div>
+          </div>
+          <div class="post-arrow">
+            <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+          </div>
+        </a>
+
+        <!-- Post 2 -->
+        <a href="blog2.html"
+           class="post-card reveal"
+           data-tags="Thoughts">
+          <div class="post-banner">
+            <div class="post-banner-bg" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);">ROOT'S</div>
+            <div class="post-number">02</div>
+            <div class="post-reading-time">
+              <i data-lucide="clock" style="width:12px;height:12px;"></i> 3 min
+            </div>
+          </div>
+          <div class="post-content">
+            <h2>root's</h2>
+            <div class="post-date">
+              <i data-lucide="calendar" style="width:13px;height:13px;"></i>
+              June 3, 2026
+            </div>
+            <div class="post-desc">
+              not a root finding algorithm.
+            </div>
+            <div class="post-tags">
+              <span class="post-tag">Thoughts</span>
+            </div>
+          </div>
+          <div class="post-arrow">
+            <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+          </div>
+        </a>
+
+        <!-- Post 3 -->
+        <a href="blog3.html"
+           class="post-card reveal"
+           data-tags="Thoughts,Philosophy">
+          <div class="post-banner">
+            <div class="post-banner-bg" style="background: linear-gradient(135deg, #2d1b4e, #4a1a6b, #1a3a5c);">TELEPATHY</div>
+            <div class="post-number">03</div>
+            <div class="post-reading-time">
+              <i data-lucide="clock" style="width:12px;height:12px;"></i> — min
+            </div>
+          </div>
+          <div class="post-content">
+            <h2>Is telepathy even real?</h2>
+            <div class="post-date">
+              <i data-lucide="calendar" style="width:13px;height:13px;"></i>
+              June 21, 2026
+            </div>
+            <div class="post-desc">
+              Coming soon...
+            </div>
+            <div class="post-tags">
+              <span class="post-tag">Thoughts</span>
+              <span class="post-tag">Philosophy</span>
+            </div>
+          </div>
+          <div class="post-arrow">
+            <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+          </div>
+        </a>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState">
+          <div class="empty-state-icon">
+            <i data-lucide="file-x" style="width:32px;height:32px;"></i>
+          </div>
+          <h3>No posts found</h3>
+          <p>Try a different filter tag.</p>
+        </div>
+
+      </div><!-- /posts-grid -->
+
+      <!-- Back to Home -->
+      <div class="back-section reveal">
+        <a href="index.html" class="btn btn-outline">
+          <i data-lucide="arrow-left" style="width:18px;height:18px;"></i>
+          Back to Home
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-socials">
+        <a href="https://github.com/MuktadirHQ" target="_blank" aria-label="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 8 18v4"></path>
+          </svg>
+        </a>
+        <a href="https://linkedin.com/in/muktadirhq" target="_blank" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect width="4" height="12" x="2" y="9"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </a>
+        <a href="https://codeforces.com/profile/Muk74dir" target="_blank" aria-label="Codeforces">
+          <i data-lucide="code" style="width:20px;height:20px;"></i>
+        </a>
+        <a href="mailto:hqmuk74dir@gmail.com" aria-label="Email">
+          <i data-lucide="mail" style="width:20px;height:20px;"></i>
+        </a>
+      </div>
+      <p>Designed &amp; Built by <strong>Muktadir Haque Sarker</strong> with <span class="heart">❤️</span></p>
+      <p style="margin-top: 6px; font-size: 0.75rem;">&copy; 2026 — All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" id="scrollTopBtn" aria-label="Scroll to top">
+    <i data-lucide="arrow-up" style="width:22px;height:22px;"></i>
+  </button>
+
+  <!-- ===== Scripts ===== -->
+  <script>
+    lucide.createIcons();
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+    let menuOpen = false;
+
+    function openMenu() {
+      menuOpen = true;
+      navLinks.classList.add('active');
+      document.body.classList.add('menu-open');
+      mobileToggle.innerHTML = '<i data-lucide="x" style="width:24px;height:24px;"></i>';
+      lucide.createIcons();
+    }
+
+    function closeMenu() {
+      menuOpen = false;
+      navLinks.classList.remove('active');
+      document.body.classList.remove('menu-open');
+      mobileToggle.innerHTML = '<i data-lucide="menu" style="width:24px;height:24px;"></i>';
+      lucide.createIcons();
+    }
+
+    mobileToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      menuOpen ? closeMenu() : openMenu();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menuOpen) closeMenu();
+    });
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Scroll to top
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
+    });
+    scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ===== Filter Logic =====
+    const tabs = document.querySelectorAll('.filter-tab');
+    const cards = document.querySelectorAll('.post-card');
+    const emptyState = document.getElementById('emptyState');
+    const totalCountEl = document.getElementById('totalCount');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const filter = tab.dataset.filter;
+        let visible = 0;
+
+        cards.forEach(card => {
+          const tags = card.dataset.tags ? card.dataset.tags.split(',') : [];
+          const matches = filter === 'all' || tags.includes(filter);
+          card.classList.toggle('hidden', !matches);
+          if (matches) visible++;
+        });
+
+        totalCountEl.textContent = filter === 'all' ? cards.length : visible;
+        emptyState.classList.toggle('visible', visible === 0);
+      });
+    });
+  </script>
+</body>
+</html>
